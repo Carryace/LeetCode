@@ -4,9 +4,10 @@ LeetCode Solutions with Notes for Where it went wrong/ Basic Idea around it
 ## Solutions
 
 ## Notes
+Notes folder contains the three sections to demonstrate
 
-### Solution Note Format
+### Basic Idea
 
-### Solution Basics
+### Revised Idea
 
-### Ideas
+### Where Went Wrong

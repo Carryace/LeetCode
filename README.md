@@ -2,6 +2,7 @@
 LeetCode Solutions with Notes for Where it went wrong/ Basic Idea around it
 
 ## Solutions
+JavaScript Solutions for coding problems
 
 ## Notes
 Notes folder contains the three sections to demonstrate
@@ -14,3 +15,6 @@ If initial idea is not good enough to solve the problem or cannot solve, we will
 
 ### Where Went Wrong
 Keep an record of the mistakes that are made before the first success submission
+
+## Research
+Research topics for front-end

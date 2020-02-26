@@ -52,10 +52,46 @@ Server compiles the initial route and quickly render on the browser, it works be
 
 ### Pre-rendering
 
-### PRPL Pattern
+Pre-render can be really good choice for small web applications, especially those have only a few different routes. It lets you deliver a really fast first paint.
 
+It just directly sends a static file on the first request, no user data no javascript, just static file. Kind of like a loading template skeleton. Once you have user specific data ready, you can load it up to replace the static skeleton there.
+
+Still, for different routes you need different skeleton html files to be loaded and then let the Js framework rehydrate it with actual data. This will need you redirect your routes to the specific statis skeleton file:
+
+- https://local/ -> redirect to the index.html file
+- https://local/about -> redirect to about/index.html file
+
+And this is exactly why it only works for small application, it would be painful if you have handreds of pages.
+
+
+## PRPL Pattern
+PRPL pattern is actually not a rendering method, it is a pattern or strategy that we can follow to make our web application load faster.
+
+Google developed web applicaiton pattern that works exceptionally well on smartpones and other devices with unreliable network connections.
+
+PRPL stands for:
+- **Push** critical resources for the initial URL route using `<link preload>` and Http/2
+- **Render** initial route
+- **Pre-cache** remaining routes
+- **Lazy-load** and create remaining routes on demand
+
+To do this, the server needs to be able to know what resouce is required by which app routes.Instead of bundling the resources into a single unit for download, it uses Http2 push to deliver the individual resources needed to render the requested route.
+
+
+
+
+Preload
+
+HTTP Push: it's coming from http/2 as a core feature, it allows you to send site assets to the user before they've even asked for them.
 
 
 ## References 
 [1] [What does it mean to "render" a page?][https://www.pathinteractive.com/blog/design-development/rendering-a-webpage-with-google-webmaster-tools/]
+
 [2] [Whats server side rendering and do I need it][https://medium.com/@baphemot/whats-server-side-rendering-and-do-i-need-it-cb42dc059b38]
+
+[3] [clent side vs server side vs pre-render][https://www.toptal.com/front-end/client-side-vs-server-side-pre-rendering]
+
+[4] [Apply instant loading with the PRPL pattern][https://web.dev/apply-instant-loading-with-prpl/]
+
+[5] [Guide http2 server push][https://www.smashingmagazine.com/2017/04/guide-http2-server-push/]

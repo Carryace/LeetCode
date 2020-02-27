@@ -77,12 +77,32 @@ PRPL stands for:
 
 To do this, the server needs to be able to know what resouce is required by which app routes.Instead of bundling the resources into a single unit for download, it uses Http2 push to deliver the individual resources needed to render the requested route.
 
+HTTP Push: 
+it's coming from http/2 as a core feature, it allows you to send site assets to the user before they've even asked for them.
 
+Server Push: 
+The traditional way of accessing websites is always request and response pattern:
+1. Initial request (commonly for HTML doc)
+2. Server replies with requested HTML resource
+3. HTML is parsed with rendering engine, where references to other assets are discoverd, eg style sheets, scripts, images etc.
+4. Browser Make separate call to fetch each asset discovered
+5. Server respond with asset content with some delays
 
+This works like a waterfall, the problem is that it forces user to wait for browser to discover the necessary assets. With server push, it lets the server preemptively push server assets to the client without the user having explicitly asked for them. Now the process will be like this:
+1. Initial request from browser
+2. Server replies with requested HTML resouce plus critical assets like style sheets, scripts and images etc.
 
-Preload
+Server Push actually helps us reducing round trips that is happening between client and server, it's like a suitable alternative for a number of HTTP/1 specific optimization anti-patterns, such as inlining css and javascript directly into HTML etc. The problem for inlining css and javascript is that it **cannot be catched properly**(like when user goes to another page that requires the same css/script, it will still need to request from server). Only when assets remains external and modular, it can be cached much more effeciently. 
 
-HTTP Push: it's coming from http/2 as a core feature, it allows you to send site assets to the user before they've even asked for them.
+How to use Server Push:
+Using a server push usually involves using the `link` Http header, which takes on this format:
+
+`Link: </css/styles.css>; rel=preload; as=style`
+
+How to tell whether server push is working:
+Hover over the asset in chrome devtool network, it will show `Server Push` label for you if that asset is server pushed.
+Also, you can use nghttp command-line client to examine a response from an Http/2 server: `nghttp -ans https://example.com`
+
 
 
 ## References 

@@ -5,7 +5,7 @@
 - install NativeScript CLI:
   > $ npm install -g nativescript
 
-  Might face some issue because of npm registry, please run below to edit the registry and revert configuration back afterwards if necessary
+  Might face some issue because of npm registry, please run below to edit the registry(delete the jetblue npm registry) and revert configuration back afterwards if necessary
   > $ npm config edit
 
 - install iOS and Android requirements
@@ -19,11 +19,10 @@
   We can set `JAVA_HOME` to v1.8 like below and then try above again:
   > export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
-## Create new NativeScript project
-  > $ tns create `PROJECT_NAME`
-  
-  It might get into issue because of permission errors, try below:
-  > $ chown -R `userName` `FOLRDER_DIR(which needs permission)`
-
-  Or, you can try installing `--unsafe-perm`
-  > $ npm install -g --unsafe-perm
+## Run Nativescript-rwb app
+- to install all the dependencies
+  > $ yarn 
+- run code on simulator
+  > $ tns run ios
+- run code with web app
+  > $ yarn start 

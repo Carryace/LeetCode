@@ -27,7 +27,7 @@ The reason is that, the hello-world image file system snapshot does not support 
 
 > $ docker ps
 
-![Docker PS cmd](assets/docker_ps_cmd.png)
+To list all running containers.
 
 > $ docker ps --all
 
@@ -58,9 +58,11 @@ since it will print all the output logs from container and paste in your termina
 
 ### Stopping/Killing a Container
 > $ docker stop {container id}
+
 It will send a `SIGTERM` (signal termination) to the container, tell it to shut down from itself. So the container can shut down with some file save and do some clean up on its own. On default, it gives container **10 secs** to shut down.
 
 > $ docker kill {container id}
+
 It will send a `SIGKILL` (signal kill) to the container, and tell it to stop immediately.
 
 ### Restart a stopped container

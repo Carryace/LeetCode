@@ -68,13 +68,14 @@ Vue instance generates a virtual DOM template and compare with old virtual DOM w
 ## VueJs Instance LifeCycle
 
 * `new Vue()`
-* `beforeCreate()` get called, initialize data and events
-* Instance Created, `created()` gets called, compile template
-* `beforeMount()` gets called, replace **el** with compiled templated
-* Instance mounted to DOM
-* If data changed and re-render needed, then call `beforeUpdate()` to re-render DOM
+* `beforeCreate()` get called, initialize data and events. Nothing on the screen yet.
+* Instance Created, `created()` gets called, compile template. Still nothing on screen.
+* `beforeMount()` gets called, replace **el** with compiled templated. Still not reflected on screen.
+* `mounted()`: Instance mounted to DOM, rendered to screen.
+* If data changed and re-render needed, then call `beforeUpdate()` to re-render DOM. Not reflect changes to screen yet.
 * `update()` gets called to mount updated instance to DOM
-* `beforeDestroy()` gets called right befre the instance gets destroied
+* `beforeUnmount()` gets called right befre the instance gets destroied, we can clear our bindings, subscriptions here. Still see the component on the screen.
+* `unmounted()` component removed/destroyed
 
 ## Connect between Components
 
@@ -209,3 +210,30 @@ Define a mixin js file
     mixins: [demoMixin]
   }
 ```
+
+## Vue Reactivity
+In Javascript, typically, if an assignment gets executed(eg. ```const a = b + c```), even if `b` and `c` gets changed afterwards, `a` will still remain the same value as assigned, which means, javascript does not react to the change of these values. However, to implement the data binding there in `Vue`, `Vue` is using `Proxy`(which is an defined class in Js) to implement the reactivity when necessary:
+```javascript
+# How Proxy works within Javascript
+const data = {
+  msg: 'Hello',
+};
+
+const handler = {
+  set(target, key, value) {
+    console.log(target);
+    console.log(key);
+    console.log(value);
+  }
+};
+
+const proxy = new Proxy(data, handler);
+
+proxy.message = 'Hello!!!';
+// console log as below:
+// {msg: 'Hello'}
+// msg
+// 'Hello!!!'
+```
+
+With `Proxy` class, we can get notified whenever some property within object gets changed and can deal with the change within the `set` method.

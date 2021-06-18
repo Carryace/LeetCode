@@ -51,3 +51,14 @@ Make sure you have meaningful names for each of the function, and readers should
 Why Design Patterns are still useful? 
 
 Yes, those are pretty old ideas and strategies, but it still gives us a quick way to achieve an agreement between developers. We should be really fast on identify the scenarios that fits the current requirements/design.
+
+## Continuous Improvement
+### Testing and Refactoring
+You will need to test every single line of code you write, you should always do that, there is no meaning for a testing coverage to be under 100%. Either it's 100% or 0%.
+
+Why we need to care so much about testing? 
+Let's think about the refactoring process, they you will understand. While refactoring, how would you know that you are doing the right thing, the refactored code works the same way as it was? The ideal case is that you have a button that you can click, if it turns to red then you did something wrong while refactoring, if it turns to green then your code is fine. That button we talked about is `Testing`. And that's the whole meaning of testing, it is the only way that keeps our app in a healthy state and helps us keep improving our code.
+
+
+### Do not Dump on QA, they will find nothing
+The group needs a group of QA because developers did not do their job. Instead of relying on QA, do a test automation!

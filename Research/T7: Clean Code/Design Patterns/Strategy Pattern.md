@@ -6,7 +6,7 @@
 
 ## Why do we need this Pattern? What does it try to solve
 
-Normally, we do heirarchy for classes to share the reusable methods downwards to the children from parent abstrcut/concret class, of course, child can have the ability to implement the method on a different way. However, when a heirarchy goes larger from one parent like below, usually what is going to happen is that lots of code need to be shared between children
+Normally, we do heirarchy for classes to share the reusable methods downwards to the children from parent abstrcut/concret class, of course, child can have the ability to implement the method on a different way. However, when a heirarchy goes larger from one parent like below, usually what is going to happen is that lots of code need to be shared between children or siblings
 
 ![Class Diagram](./assets/Strategy_Pattern_Problem_Diagram.png)
 

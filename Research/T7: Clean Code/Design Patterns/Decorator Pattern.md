@@ -28,13 +28,46 @@ The `AddonDecorator` is still a `Beverage` from above UML diagram, and it will h
 To implement `cost()` function:
 1. for Base Product Class, we can simply do:
     ```javascript
-    cost() {
-      return 1;
+    class Decaf extends Beverage {
+      cost() {
+        return 1;
+       }
     }
     ```
 2. for Addon Class, since it contains an instance from `Beverage` class, we can do:
     ```javascript
-    cost() {
-      return this.beverage.cost() + 2;
+    class Caramel extends AddonDecorator {
+      Beverage beverage;
+      constructor(Beverage bvg) {
+        this.beverage = bvg;
+      }
+      cost() {
+        return this.beverage.cost() + 2;
+      }
     }
     ```
+    Once we have more than one wrap of class, for example, user wants SoyMilk and Caramel both add into a Espresso, what our decorator pattern can do is to wrap Espresso with SoyMilk and then wrap it with Caramel. It means that while calculating the cost, we are actually using recursion to drill down to the lowest level Beverage, which must be a real product like Decaf or Espresson and then calculate the cost back up to the up most AddonDecorator.
+
+3. for Beverage Abstract Class or AddonDecorator Abstract Class:
+    ```javascript
+    abstract class Beverage {
+       public abstract cost();
+    }
+    ```
+
+    ```javascript
+    abstract class AddonDecorator extends Beverage {
+       public abstract cost();
+    }
+    ```
+While using it, we can do something like below:
+```javascript
+  // to create a Decaf with SoyMilk and Caramel
+  Beverage b = new Caramel(new SoyMilk(new Decaf()));
+  b.cost(); // will return the final cost
+```
+## Thoughts on Decorator Pattern
+
+Actually, above example might not be really suitable for Decorator, it's kind of over-engineering on this example because the `cost()` method there is really simple (probably for all of the AddonDecortor concrete classes they will have almost same implementation). This means, instead of having AddonDecorator extends from Beverage Class, we can have a list of AddonDecorator as dependency directly injected into Beverage Class constructor, and while calculating cost, we can just iterate through the list of AddonDecorators to come with the final cost.
+
+I'd say if the shared methods(`cost()` method in above case) are complicated enough and have different implementation from each other, it could be a great example to use Decorator Pattern.

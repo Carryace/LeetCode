@@ -50,3 +50,17 @@ You might see when adding 1 or 2 worker instances using node cluster manager, th
 
 ## Solution to nodeJs cluster mode -> PM2
 `PM2` is a nodeJs cluster management tool that is currently used in most of nodeJs prod deployment.
+
+`$ pm2 start index.js -i 0` 
+
+it will start your app with clusters that pm2 feels fit, or you can enter some numbers there to have pm2 running with a fixed number of threads
+
+`$ pm2 monit`
+
+it starts a shell interface for you to better monitor how your app node is working
+
+`$ pm2 delete index`
+
+It can stop your app from running
+
+Normally, we are not going to use it unless we have a very good reason for it
